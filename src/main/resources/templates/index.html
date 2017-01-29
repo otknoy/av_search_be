@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <title>Thymeleaf Sample</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <header>
+      <h4><a href="/">Exploratory AV Search</a></h4>
+
+      <form method="GET" action="/">
+	<p>
+	  <input type="search" name="query" placeholder="Please enter a query" value="湊莉久" required="true" />
+	  <input type="submit" value="Search" />
+	</p>
+      </form>
+    </header>
+
+    <div>
+      <div th:each="item : ${items}">
+	<img src="http://pics.dmm.co.jp/digital/video/1sdmu00472/1sdmu00472pt.jpg>" th:src="${item.imageURL.small}"></img>
+	<p th:text="${item.title}">hoge title</p>
+	<p th:text="${item.prices.price}">1234</p>
+	<div th:each="genre : ${item.iteminfo.genre}">
+	  <p th:text="${genre.name}">genre hoge</p>
+	</div>
+	<div th:each="actress, stat : ${item.iteminfo.actress}">
+	  <p th:if="${(stat.index % 3) eq 0}" th:text="${actress.name}">genre hoge</p>
+	</div>
+      </div>
+    </div>
+
+    <div th:text="${response}">
+      response
+    </div>
+  </body>
+</html>
