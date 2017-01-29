@@ -7,9 +7,9 @@
   </head>
   <body>
     <header>
-      <h4><a href="/">Exploratory AV Search</a></h4>
+      <h4><a href="./">Exploratory AV Search</a></h4>
 
-      <form method="GET" action="/">
+      <form method="GET" action="./">
 	<p>
 	  <input type="search" name="query" placeholder="Please enter a query" value="湊莉久" required="true" />
 	  <input type="submit" value="Search" />
@@ -19,20 +19,16 @@
 
     <div>
       <div th:each="item : ${items}">
-	<img src="http://pics.dmm.co.jp/digital/video/1sdmu00472/1sdmu00472pt.jpg>" th:src="${item.imageURL.small}"></img>
-	<p th:text="${item.title}">hoge title</p>
-	<p th:text="${item.prices.price}">1234</p>
+	<img src="http://pics.dmm.co.jp/digital/video/rbb00078/rbb00078ps.jpg" th:src="${item.imageURL.small}"></img>
+	<p th:text="${item.title}">発射寸前！2人以上からご奉仕されるハーレムフェラチオ16時間</p>
+	<p th:text="${item.prices.price}">300~</p>
 	<div th:each="genre : ${item.iteminfo.genre}">
-	  <p th:text="${genre.name}">genre hoge</p>
+	  <p th:text="${genre.name}">美少女</p>
 	</div>
 	<div th:each="actress, stat : ${item.iteminfo.actress}">
-	  <p th:if="${(stat.index % 3) eq 0}" th:text="${actress.name}">genre hoge</p>
+	  <p th:if="${(stat.index % 3) eq 0}" th:text="${actress.name}">つぼみ</p>
 	</div>
       </div>
-    </div>
-
-    <div th:text="${response}">
-      response
     </div>
   </body>
 </html>
