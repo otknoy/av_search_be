@@ -8,11 +8,15 @@ import java.net.URI;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.LinkedMultiValueMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import jp.otknoy.dmm.Response;
 import jp.otknoy.dmm.Item;
 
 public class SearchApi {
+
+    private static final Logger logger = LoggerFactory.getLogger(SearchApi.class);
 
     private static String baseUrl = "https://api.dmm.com";
 
@@ -49,7 +53,9 @@ public class SearchApi {
 	Response response = null;
 	try {
 	    response = rt.getForObject(uri, Response.class);
+	    logger.info("search success: keyword={}", keyword);
 	} catch (org.springframework.web.client.HttpClientErrorException e) {
+	    logger.info("search failed: keyword.={}", keyword);
 	    e.printStackTrace();
 	}
 
