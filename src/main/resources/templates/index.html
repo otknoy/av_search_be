@@ -22,11 +22,18 @@
 	<img src="http://pics.dmm.co.jp/digital/video/rbb00078/rbb00078ps.jpg" th:src="${item.imageURL.small}"></img>
 	<p th:text="${item.title}">発射寸前！2人以上からご奉仕されるハーレムフェラチオ16時間</p>
 	<div th:each="genre : ${item.iteminfo.genre}">
-	  <a href="?query=美少女"
-	     th:href="@{/(query=${genre.name})}"><p th:text="${genre.name}">美少女</p></a>
+	  <p>
+	    <a href="?query=美少女"
+	       th:href="@{/(query=${genre.name})}"
+	       th:text="${genre.name}">美少女</a>
+	  </p>
 	</div>
 	<div th:each="actress, stat : ${item.iteminfo.actress}">
-	  <p th:if="${(stat.index % 3) eq 0}" th:text="${actress.name}">つぼみ</p>
+	  <p th:if="${(stat.index % 3) eq 0}">
+	    <a href="?query=つぼみ"
+	       th:href="@{/(query=${actress.name})}"
+	       th:text="${actress.name}">つぼみ</a>
+	  </p>
 	</div>
       </div>
     </div>
