@@ -54,6 +54,6 @@ public class ItemSearchApiService {
     }
 
     public Response search(String keyword) {
-	return search(keyword, 10, 1, "rank");
+	return search(keyword, 10, 1, "date");
     }
 }
