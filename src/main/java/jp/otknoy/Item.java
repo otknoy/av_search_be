@@ -11,16 +11,16 @@ public class Item {
     private List<String> actress;
     private List<String> genre;
 
-    public static Item create(jp.otknoy.dmm.api.itemlist.Item item) {
+    public static Item create(jp.otknoy.dmm.api.items.Item item) {
 	Item i = new Item();
 	i.setTitle(item.getTitle());
 	i.setImageUrl(item.getImageURL().getList());
 
-	jp.otknoy.dmm.api.itemlist.Iteminfo iteminfo
+	jp.otknoy.dmm.api.items.Iteminfo iteminfo
 	    = item.getIteminfo();
-	List<jp.otknoy.dmm.api.itemlist.Genre> genres
+	List<jp.otknoy.dmm.api.items.Genre> genres
 	    = iteminfo.getGenre();
-	List<jp.otknoy.dmm.api.itemlist.Actress> actresses
+	List<jp.otknoy.dmm.api.items.Actress> actresses
 	    = iteminfo.getActress();
 
 	i.setGenre(genres.stream()
@@ -37,7 +37,7 @@ public class Item {
 	return i;
     }
 
-    public static List<Item> create(jp.otknoy.dmm.Response response) {
+    public static List<Item> create(jp.otknoy.dmm.api.items.Response response) {
 	return response.getResult().getItems()
 	    .stream()
 	    .map(i -> Item.create(i))

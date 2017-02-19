@@ -1,9 +1,9 @@
-package jp.otknoy.dmm.api.itemlist;
+package jp.otknoy.dmm.api.items;
 
 import lombok.Data;
 
 @Data
-public class Maker {
+public class Genre {
     private String name;
     private int id;
 }
