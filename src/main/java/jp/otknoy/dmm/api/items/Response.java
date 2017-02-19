@@ -1,8 +1,6 @@
-package jp.otknoy.dmm;
+package jp.otknoy.dmm.api.items;
 
 import lombok.Data;
-
-import jp.otknoy.dmm.api.itemlist.Result;
 
 @Data
 public class Response {

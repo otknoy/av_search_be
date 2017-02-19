@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.ui.Model;
 
 import jp.otknoy.dmm.ItemSearchApiService;
-import jp.otknoy.dmm.Response;
+import jp.otknoy.dmm.api.items.Response;
 
 @Controller
 @EnableAutoConfiguration()

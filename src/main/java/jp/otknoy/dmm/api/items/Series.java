@@ -1,4 +1,4 @@
-package jp.otknoy.dmm.api.itemlist;
+package jp.otknoy.dmm.api.items;
 
 import lombok.Data;
 

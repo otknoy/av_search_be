@@ -10,6 +10,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jp.otknoy.dmm.api.items.Response;
+
 @Component
 public class ItemSearchApiService {
 
