@@ -1,10 +1,10 @@
 package jp.otknoy;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.context.annotation.ComponentScan;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -24,9 +24,11 @@ public class DmmController {
     @RequestMapping("/")
     public String index(Model model, @RequestParam(defaultValue="") String query) {
 	Response response = itemSearchApiService.search(query);
-	List<Item> items = Item.create(response);
 
-	model.addAttribute("items", items);
+	Item item = Item.create(response.getResult().getItems().get(0));
+	 List<Item> items = Item.create(response);
+
+	 model.addAttribute("items", items);
 
 	return "index";
     }

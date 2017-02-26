@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 @Data
 public class Item {
+
     private String title;
     private String imageUrl;
     private List<String> actress;
@@ -40,7 +41,7 @@ public class Item {
     public static List<Item> create(jp.otknoy.dmm.api.items.Response response) {
 	return response.getResult().getItems()
 	    .stream()
-	    .map(i -> Item.create(i))
+	    .map(Item::create)
 	    .collect(Collectors.toList());
     }
 }

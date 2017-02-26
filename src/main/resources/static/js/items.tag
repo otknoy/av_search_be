@@ -15,6 +15,12 @@
     </div>
   </div>
 
+  <style>
+   :scope {
+     backgroud: #fff000;
+   }
+  </style>
+
   <script>
    this.items = opts.items;
   </script>
