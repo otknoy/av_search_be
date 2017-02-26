@@ -57,7 +57,7 @@ public class ItemTest {
 	    = this.items.get(0);
 	Item item = Item.create(dmmItem);
 
-	assertEquals("aaa title", dmmItem.getTitle());
+	assertEquals("aaa title", item.getTitle());
 	assertEquals("http://affiliate.url.test", item.getUrl());
 	assertEquals("http://hogehoge.com/list.jpg", item.getImageUrl());
 	assertEquals("genre1", item.getGenre().get(0));
