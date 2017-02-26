@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class Item {
 
     private String title;
+    private String url;
     private String imageUrl;
     private List<String> actress;
     private List<String> genre;
@@ -15,6 +16,7 @@ public class Item {
     public static Item create(jp.otknoy.dmm.api.items.Item item) {
 	Item i = new Item();
 	i.setTitle(item.getTitle());
+	i.setUrl(item.getAffiliateURL());
 	i.setImageUrl(item.getImageURL().getList());
 
 	jp.otknoy.dmm.api.items.Iteminfo iteminfo

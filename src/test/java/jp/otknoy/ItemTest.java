@@ -22,6 +22,7 @@ public class ItemTest {
 	jp.otknoy.dmm.api.items.Item item1
 	    = new jp.otknoy.dmm.api.items.Item();
 	item1.setTitle("aaa title");
+	item1.setAffiliateURL("http://affiliate.url.test");
 
 	jp.otknoy.dmm.api.items.ImageUrl imageUrl
 	    = new jp.otknoy.dmm.api.items.ImageUrl();
@@ -57,6 +58,7 @@ public class ItemTest {
 	Item item = Item.create(dmmItem);
 
 	assertEquals("aaa title", dmmItem.getTitle());
+	assertEquals("http://affiliate.url.test", item.getUrl());
 	assertEquals("http://hogehoge.com/list.jpg", item.getImageUrl());
 	assertEquals("genre1", item.getGenre().get(0));
     	assertEquals("actress1", item.getActress().get(0));
