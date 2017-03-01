@@ -1,6 +1,7 @@
 package jp.otknoy;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ public class DmmApiController {
     @Autowired
     private ItemSearchApiService itemSearchApiService;
 
+    @CrossOrigin()
     @RequestMapping("/dmm/search")
     public Response dmmSearch(@RequestParam(defaultValue="") String query) {
 	Response response = itemSearchApiService.search(query);
@@ -24,6 +26,7 @@ public class DmmApiController {
 	return response;
     }
 
+    @CrossOrigin()
     @RequestMapping("/search")
     public List<Item> search(@RequestParam(defaultValue="") String query) {
 	Response response = itemSearchApiService.search(query);
