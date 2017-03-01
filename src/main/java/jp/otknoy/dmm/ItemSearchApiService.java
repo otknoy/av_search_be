@@ -26,6 +26,8 @@ public class ItemSearchApiService {
     private String affiliateId;
 
     public Response search(String keyword, int hits, int offset, String sort) {
+	long start = System.currentTimeMillis();
+
 	URI uri = UriComponentsBuilder.fromUriString(baseUrl)
 	    .path("/affiliate/v3/ItemList")
 	    .queryParam("api_id", apiId)
@@ -52,10 +54,13 @@ public class ItemSearchApiService {
 	    e.printStackTrace();
 	}
 
+	long end = System.currentTimeMillis();
+	logger.info("response time: {} ms", end - start);
+
 	return res;
     }
 
     public Response search(String keyword) {
-	return search(keyword, 10, 1, "rank");
+	return search(keyword, 6, 1, "rank");
     }
 }
