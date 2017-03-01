@@ -26,7 +26,7 @@ public class ItemTest {
 
 	jp.otknoy.dmm.api.items.ImageUrl imageUrl
 	    = new jp.otknoy.dmm.api.items.ImageUrl();
-	imageUrl.setList("http://hogehoge.com/list.jpg");
+	imageUrl.setSmall("http://hogehoge.com/list.jpg");
 	item1.setImageURL(imageUrl);
 
 	jp.otknoy.dmm.api.items.Iteminfo iteminfo
