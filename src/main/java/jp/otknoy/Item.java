@@ -1,5 +1,6 @@
 package jp.otknoy;
 
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 import java.util.stream.Collectors;
@@ -10,14 +11,14 @@ public class Item {
     private String title;
     private String url;
     private String imageUrl;
-    private List<String> actress;
-    private List<String> genre;
+    private List<String> actress = new ArrayList<>();
+    private List<String> genre   = new ArrayList<>();
 
     public static Item create(jp.otknoy.dmm.api.items.Item item) {
 	Item i = new Item();
 	i.setTitle(item.getTitle());
 	i.setUrl(item.getAffiliateURL());
-	i.setImageUrl(item.getImageURL().getList());
+	i.setImageUrl(item.getImageURL().getSmall());
 
 	jp.otknoy.dmm.api.items.Iteminfo iteminfo
 	    = item.getIteminfo();
