@@ -1,6 +1,9 @@
 package jp.otknoy;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import javax.validation.Valid;
+import org.springframework.validation.Errors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,10 +29,28 @@ public class DmmController {
 	Response response = itemSearchApiService.search(query);
 
 	Item item = Item.create(response.getResult().getItems().get(0));
-	 List<Item> items = Item.create(response);
+	List<Item> items = Item.create(response);
 
-	 model.addAttribute("items", items);
+	model.addAttribute("items", items);
 
 	return "index";
     }
+
+    @RequestMapping("/search")
+    public String search(Model model,
+			 @Valid SearchRequest request,
+			 Errors errors) {
+	if (errors.hasErrors()) {
+	    return "error";
+	}
+
+	Response response =
+	    itemSearchApiService.search(request.getKeyword(), request.getSort());
+	List<Item> items = Item.create(response);
+
+	model.addAttribute("items", items);
+
+	return "index";
+    }
+
 }

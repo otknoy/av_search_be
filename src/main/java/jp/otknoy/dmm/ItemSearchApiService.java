@@ -60,6 +60,10 @@ public class ItemSearchApiService {
 	return res;
     }
 
+    public Response search(String keyword, String sort) {
+	return search(keyword, 6, 1, sort);
+    }
+
     public Response search(String keyword) {
 	return search(keyword, 6, 1, "rank");
     }
