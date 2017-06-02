@@ -19,19 +19,10 @@ public class DmmApiController {
     private ItemSearchApiService itemSearchApiService;
 
     @CrossOrigin()
-    @RequestMapping("/dmm/search")
+    @RequestMapping("/api/search")
     public Response dmmSearch(@RequestParam(defaultValue="") String query) {
 	Response response = itemSearchApiService.search(query);
 
 	return response;
-    }
-
-    @CrossOrigin()
-    @RequestMapping("/search")
-    public List<Item> search(@RequestParam(defaultValue="") String query) {
-	Response response = itemSearchApiService.search(query);
-	List<Item> items = Item.create(response);
-
-	return items;
     }
 }
