@@ -2,6 +2,10 @@ package jp.otknoy.av.search;
 
 import jp.otknoy.av.search.dmm.DmmSearchService;
 import jp.otknoy.av.search.dmm.item.Response;
+import jp.otknoy.av.search.dmm.item.Genre;
+import jp.otknoy.av.search.dmm.item.Maker;
+import jp.otknoy.av.search.dmm.item.Series;
+import jp.otknoy.av.search.dmm.item.Actress;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +43,18 @@ public class Controller {
                         .url(i.getAffiliateURL())
                         .imageUrl(i.getImageURL().getLarge())
                         .date(i.getDate())
+                        .genre(i.getIteminfo().getGenre().stream()
+                                .map(Genre::getName)
+                                .collect(Collectors.toList()))
+                        .maker(i.getIteminfo().getMaker().stream()
+                                .map(Maker::getName)
+                                .collect(Collectors.toList()))
+                        .series(i.getIteminfo().getSeries().stream()
+                                .map(Series::getName)
+                                .collect(Collectors.toList()))
+                        .actress(i.getIteminfo().getActress().stream()
+                                .map(Actress::getName)
+                                .collect(Collectors.toList()))
                         .build())
                 .collect(Collectors.toList());
     }
