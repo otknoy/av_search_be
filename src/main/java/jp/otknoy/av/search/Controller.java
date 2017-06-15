@@ -56,7 +56,6 @@ public class Controller {
 
                         String yomigana = a.getName();
 
-                        System.out.print("hello");
                         actress.add(jp.otknoy.av.search.Actress.builder()
                                 .name(name)
                                 .yomigana(yomigana)
