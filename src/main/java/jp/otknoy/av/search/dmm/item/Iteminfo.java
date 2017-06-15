@@ -1,4 +1,4 @@
-package jp.otknoy.av.search.items;
+package jp.otknoy.av.search.dmm.item;
 
 import java.util.ArrayList;
 import java.util.List;

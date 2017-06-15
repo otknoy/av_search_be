@@ -1,6 +1,6 @@
-package jp.otknoy.av.search;
+package jp.otknoy.av.search.dmm;
 
-import jp.otknoy.av.search.items.Response;
+import jp.otknoy.av.search.dmm.item.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,7 +44,7 @@ public class DmmSearchService {
         Response res = null;
         try {
             res = rt.getForObject(uri, Response.class);
-            logger.info("search successed");
+            logger.info("search success");
         } catch (RestClientException e) {
             logger.info("search failed");
             e.printStackTrace();

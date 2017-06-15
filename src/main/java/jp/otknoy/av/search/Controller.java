@@ -1,7 +1,8 @@
 package jp.otknoy.av.search;
 
-import jp.otknoy.av.search.items.Item;
-import jp.otknoy.av.search.items.Response;
+import jp.otknoy.av.search.dmm.DmmSearchService;
+import jp.otknoy.av.search.dmm.item.Item;
+import jp.otknoy.av.search.dmm.item.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
