@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,24 +40,48 @@ public class Controller {
 
     private List<Item> convertResponse(Response response) {
         return response.getResult().getItems().stream()
-                .map(i -> Item.builder()
-                        .title(i.getTitle())
-                        .url(i.getAffiliateURL())
-                        .imageUrl(i.getImageURL().getLarge())
-                        .date(i.getDate())
-                        .genre(i.getIteminfo().getGenre().stream()
-                                .map(Genre::getName)
-                                .collect(Collectors.toList()))
-                        .maker(i.getIteminfo().getMaker().stream()
-                                .map(Maker::getName)
-                                .collect(Collectors.toList()))
-                        .series(i.getIteminfo().getSeries().stream()
-                                .map(Series::getName)
-                                .collect(Collectors.toList()))
-                        .actress(i.getIteminfo().getActress().stream()
-                                .map(Actress::getName)
-                                .collect(Collectors.toList()))
-                        .build())
+                .map(i -> {
+                    Iterator<Actress> iterator = i.getIteminfo().getActress().iterator();
+                    List<jp.otknoy.av.search.Actress> actress = new ArrayList<>();
+                    while (iterator.hasNext()) {
+                        Actress a = iterator.next();
+
+                        String id = a.getId();
+                        String name = a.getName();
+
+                        a = iterator.next();
+                        if (!a.getId().equals(id + "_ruby")) {
+                            continue;
+                        }
+
+                        String yomigana = a.getName();
+
+                        System.out.print("hello");
+                        actress.add(jp.otknoy.av.search.Actress.builder()
+                                .name(name)
+                                .yomigana(yomigana)
+                                .build());
+
+                        iterator.next();
+                    }
+
+                    return Item.builder()
+                            .title(i.getTitle())
+                            .url(i.getAffiliateURL())
+                            .imageUrl(i.getImageURL().getLarge())
+                            .date(i.getDate())
+                            .genre(i.getIteminfo().getGenre().stream()
+                                    .map(Genre::getName)
+                                    .collect(Collectors.toList()))
+                            .maker(i.getIteminfo().getMaker().stream()
+                                    .map(Maker::getName)
+                                    .collect(Collectors.toList()))
+                            .series(i.getIteminfo().getSeries().stream()
+                                    .map(Series::getName)
+                                    .collect(Collectors.toList()))
+                            .actress(actress)
+                            .build();
+                })
                 .collect(Collectors.toList());
     }
 }

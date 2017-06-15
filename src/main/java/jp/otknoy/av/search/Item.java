@@ -15,5 +15,5 @@ public class Item {
     private List<String> genre;
     private List<String> maker;
     private List<String> series;
-    private List<String> actress;
+    private List<Actress> actress;
 }
