@@ -16,6 +16,11 @@ import java.util.List;
 public class Controller {
     private final DmmSearchService dmmSearchService;
 
+    @RequestMapping("/")
+    public String index() {
+        return "It works.";
+    }
+
     @CrossOrigin
     @RequestMapping("/search")
     public List<Item> search(@RequestParam String p) {
