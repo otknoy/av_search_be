@@ -1,4 +1,4 @@
-package jp.otknoy.dmm.api.items;
+package jp.otknoy.av.search.items;
 
 import lombok.Data;
 

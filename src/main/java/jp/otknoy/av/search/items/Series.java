@@ -1,9 +1,9 @@
-package jp.otknoy.dmm.api.items;
+package jp.otknoy.av.search.items;
 
 import lombok.Data;
 
 @Data
-public class Maker {
+public class Series {
     private String name;
     private int id;
 }
