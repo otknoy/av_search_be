@@ -17,10 +17,10 @@ public class DmmSearchService {
 
     private static String baseUrl = "https://api.dmm.com";
 
-    @Value("${dmm.apiId}")
+    @Value("${dmm.api_id}")
     private String apiId;
 
-    @Value("${dmm.affiliateId}")
+    @Value("${dmm.affiliate_id}")
     private String affiliateId;
 
     public Response search(String keyword, int hits, int offset, String sort) {
