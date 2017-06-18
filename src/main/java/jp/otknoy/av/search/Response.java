@@ -1,7 +1,13 @@
 package jp.otknoy.av.search;
 
-/**
- * Created by otknoy on 17/06/18.
- */
+import lombok.Builder;
+import lombok.Data;
+
+import java.util.List;
+
+@Data
+@Builder
 public class Response {
+    private Request request;
+    private List<Item> items;
 }
