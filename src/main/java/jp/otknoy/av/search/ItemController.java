@@ -1,11 +1,11 @@
 package jp.otknoy.av.search;
 
-import jp.otknoy.av.search.dmm.DmmSearchService;
-import jp.otknoy.av.search.dmm.item.Response;
-import jp.otknoy.av.search.dmm.item.Genre;
-import jp.otknoy.av.search.dmm.item.Maker;
-import jp.otknoy.av.search.dmm.item.Series;
-import jp.otknoy.av.search.dmm.item.Actress;
+import jp.otknoy.av.dmm.DmmSearchService;
+import jp.otknoy.av.dmm.item.Response;
+import jp.otknoy.av.dmm.item.Genre;
+import jp.otknoy.av.dmm.item.Maker;
+import jp.otknoy.av.dmm.item.Series;
+import jp.otknoy.av.dmm.item.Actress;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class Controller {
+public class ItemController {
     private final DmmSearchService dmmSearchService;
 
     @RequestMapping("/")

@@ -1,6 +1,6 @@
-package jp.otknoy.av.search.dmm;
+package jp.otknoy.av.dmm;
 
-import jp.otknoy.av.search.dmm.item.Response;
+import jp.otknoy.av.dmm.item.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
