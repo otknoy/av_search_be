@@ -7,6 +7,7 @@ import jp.otknoy.av.search.dmm.item.Maker;
 import jp.otknoy.av.search.dmm.item.Series;
 import jp.otknoy.av.search.dmm.item.Actress;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,10 +30,14 @@ public class Controller {
 
     @CrossOrigin
     @RequestMapping("/search")
-    public List<Item> search(@RequestParam String p) {
-        System.out.println(p);
+    public List<Item> search(@Validated Request request) {
+        System.out.println(request.getKeyword());
 
-        Response response = dmmSearchService.search(p);
+        Response response = dmmSearchService.search(
+                request.getKeyword(),
+                request.getHits(),
+                request.getOffset(),
+                request.getSort());
         List<Item> items = convertResponse(response);
 
         return items;
