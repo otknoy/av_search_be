@@ -32,6 +32,8 @@ public class Controller {
     @CrossOrigin
     @RequestMapping("/search")
     public List<Item> search(@Validated Request request) {
+        long start = System.currentTimeMillis();
+
         log.info(request.toString());
 
         Response response = dmmSearchService.search(
@@ -40,6 +42,9 @@ public class Controller {
                 request.getOffset(),
                 request.getSort());
         List<Item> items = convertResponse(response);
+
+        long elapsed = System.currentTimeMillis() - start;
+        log.info("response time: {} ms", elapsed);
 
         return items;
     }

@@ -3,6 +3,7 @@ package jp.otknoy.av.search.dmm;
 import jp.otknoy.av.search.dmm.item.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +22,7 @@ public class DmmSearchService {
     @Value("${dmm.affiliate_id}")
     private String affiliateId;
 
+    @Cacheable(cacheNames = "searchItems")
     public Response search(String keyword, int hits, int offset, String sort) {
         URI uri = UriComponentsBuilder.fromUriString(baseUrl)
                 .path("/affiliate/v3/ItemList")
