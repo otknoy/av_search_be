@@ -1,9 +1,9 @@
-package jp.otknoy.av.search.dmm;
+package jp.otknoy.av.dmm;
 
-import jp.otknoy.av.search.dmm.item.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import jp.otknoy.av.dmm.item.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -12,17 +12,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Service
+@Slf4j
 public class DmmSearchService {
-    private static final Logger logger = LoggerFactory.getLogger(DmmSearchService.class);
-
     private static String baseUrl = "https://api.dmm.com";
 
-    @Value("${dmm.apiId}")
+    @Value("${dmm.api_id}")
     private String apiId;
 
-    @Value("${dmm.affiliateId}")
+    @Value("${dmm.affiliate_id}")
     private String affiliateId;
 
+    @Cacheable(cacheNames = "searchItems")
     public Response search(String keyword, int hits, int offset, String sort) {
         URI uri = UriComponentsBuilder.fromUriString(baseUrl)
                 .path("/affiliate/v3/ItemList")
@@ -37,16 +37,15 @@ public class DmmSearchService {
                 .queryParam("sort", sort)
                 .build()
                 .toUri();
-
-        logger.info("http get: uri={}", uri);
+        log.info("http get: uri={}", uri.toString());
 
         RestTemplate rt = new RestTemplate();
         Response res = null;
         try {
             res = rt.getForObject(uri, Response.class);
-            logger.info("search success");
+            log.info("search success");
         } catch (RestClientException e) {
-            logger.info("search failed");
+            log.info("search failed");
             e.printStackTrace();
         }
 
