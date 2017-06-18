@@ -2,8 +2,10 @@ package jp.otknoy.av.dmm.item;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Item {
+public class Item implements Serializable {
     private String title;
     private String affiliateURL;
     private ImageUrl imageURL;
