@@ -7,10 +7,10 @@ import jp.otknoy.av.search.dmm.item.Maker;
 import jp.otknoy.av.search.dmm.item.Series;
 import jp.otknoy.av.search.dmm.item.Actress;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class Controller {
     private final DmmSearchService dmmSearchService;
 
@@ -31,7 +32,7 @@ public class Controller {
     @CrossOrigin
     @RequestMapping("/search")
     public List<Item> search(@Validated Request request) {
-        System.out.println(request.getKeyword());
+        log.info(request.toString());
 
         Response response = dmmSearchService.search(
                 request.getKeyword(),

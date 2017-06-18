@@ -1,8 +1,7 @@
 package jp.otknoy.av.search.dmm;
 
 import jp.otknoy.av.search.dmm.item.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -12,9 +11,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Service
+@Slf4j
 public class DmmSearchService {
-    private static final Logger logger = LoggerFactory.getLogger(DmmSearchService.class);
-
     private static String baseUrl = "https://api.dmm.com";
 
     @Value("${dmm.api_id}")
@@ -37,16 +35,15 @@ public class DmmSearchService {
                 .queryParam("sort", sort)
                 .build()
                 .toUri();
-
-        logger.info("http get: uri={}", uri);
+        log.info("http get: uri={}", uri.toString());
 
         RestTemplate rt = new RestTemplate();
         Response res = null;
         try {
             res = rt.getForObject(uri, Response.class);
-            logger.info("search success");
+            log.info("search success");
         } catch (RestClientException e) {
-            logger.info("search failed");
+            log.info("search failed");
             e.printStackTrace();
         }
 
