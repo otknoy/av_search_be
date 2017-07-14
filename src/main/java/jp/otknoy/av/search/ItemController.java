@@ -4,9 +4,9 @@ import jp.otknoy.av.dmm.DmmSearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -17,13 +17,13 @@ public class ItemController {
     private final DmmSearchService dmmSearchService;
     private final ItemMapper itemMapper;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index() {
         return "It works.";
     }
 
     @CrossOrigin
-    @RequestMapping("/search")
+    @GetMapping("/search")
     public Response search(@Validated Request request) {
         long start = System.currentTimeMillis();
 
