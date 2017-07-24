@@ -1,11 +1,10 @@
 package jp.otknoy.av;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.core.RedisTemplate;
 
@@ -13,11 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@EnableCaching
-public class CacheConfig extends CachingConfigurerSupport {
+@Profile("production")
+public class CacheConfigProd extends CachingConfigurerSupport {
 
     @Bean
-    @Autowired
     public CacheManager cacheManager(RedisTemplate<Object, Object> redisTemplate) {
         RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
         cacheManager.setUsePrefix(true);
@@ -28,6 +26,5 @@ public class CacheConfig extends CachingConfigurerSupport {
         cacheManager.setExpires(expires);
 
         return cacheManager;
-
     }
 }
