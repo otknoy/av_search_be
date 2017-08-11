@@ -3,6 +3,8 @@ package jp.otknoy.av.search;
 import jp.otknoy.av.dmm.item.Genre;
 import jp.otknoy.av.dmm.item.Maker;
 import jp.otknoy.av.dmm.item.Series;
+import jp.otknoy.av.search.response.Actress;
+import jp.otknoy.av.search.response.Item;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class ItemMapper {
 
     public Item map(jp.otknoy.av.dmm.item.Item item) {
         Iterator<jp.otknoy.av.dmm.item.Actress> iterator = item.getIteminfo().getActress().iterator();
-        List<jp.otknoy.av.search.Actress> actress = new ArrayList<>();
+        List<Actress> actress = new ArrayList<>();
         while (iterator.hasNext()) {
             jp.otknoy.av.dmm.item.Actress a = iterator.next();
 
@@ -29,7 +31,7 @@ public class ItemMapper {
 
             String yomigana = a.getName();
 
-            actress.add(jp.otknoy.av.search.Actress.builder()
+            actress.add(Actress.builder()
                     .name(name)
                     .yomigana(yomigana)
                     .build());

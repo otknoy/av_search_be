@@ -1,6 +1,9 @@
 package jp.otknoy.av.search;
 
 import jp.otknoy.av.dmm.DmmSearchService;
+import jp.otknoy.av.search.response.Item;
+import jp.otknoy.av.search.response.Response;
+import jp.otknoy.av.search.response.Result;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -29,20 +32,25 @@ public class ItemController {
 
         log.info(request.toString());
 
-        List<Item> items = itemMapper.map(
-                (dmmSearchService.search(
-                        request.getKeyword(),
-                        request.getHits(),
-                        request.getOffset(),
-                        request.getSort()))
-                        .getResult().getItems());
+        jp.otknoy.av.dmm.item.Response dmmResponse = dmmSearchService.search(
+                request.getKeyword(),
+                request.getHits(),
+                request.getOffset(),
+                request.getSort());
+
+        List<Item> items = itemMapper.map(dmmResponse.getResult().getItems());
 
         long elapsed = System.currentTimeMillis() - start;
         log.info("response time: {} ms", elapsed);
 
         return Response.builder()
                 .request(request)
-                .items(items)
+                .result(Result.builder()
+                        .resultCount(dmmResponse.getResultCount())
+                        .totalCount(dmmResponse.getTotalCount())
+                        .firstPosition(dmmResponse.getFirstPosition())
+                        .items(items)
+                        .build())
                 .build();
     }
 }

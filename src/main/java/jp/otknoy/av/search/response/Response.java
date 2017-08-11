@@ -1,13 +1,12 @@
-package jp.otknoy.av.search;
+package jp.otknoy.av.search.response;
 
+import jp.otknoy.av.search.Request;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 @Builder
 public class Response {
     private Request request;
-    private List<Item> items;
+    private Result result;
 }

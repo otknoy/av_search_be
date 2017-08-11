@@ -1,15 +1,16 @@
-package jp.otknoy.av.dmm.item;
+package jp.otknoy.av.search.response;
 
 import lombok.Builder;
 import lombok.Data;
 
-import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Builder
-public class Response implements Serializable {
+public class Result {
     private int resultCount;
     private int totalCount;
     private int firstPosition;
-    private Result result;
+
+    private List<Item> items;
 }

@@ -1,5 +1,6 @@
-package jp.otknoy.av.search;
+package jp.otknoy.av.search.response;
 
+import jp.otknoy.av.search.response.Actress;
 import lombok.Builder;
 import lombok.Data;
 
