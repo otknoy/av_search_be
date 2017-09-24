@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 type Item struct {
@@ -32,7 +33,7 @@ func main() {
 
 func search(w http.ResponseWriter, r *http.Request) {
 	qs := r.URL.Query()
-	keyword := qs["keyword"][0]
+	keyword := strings.Join(qs["keyword"], " ")
 
 	res := dmm.Search(keyword, dmmApiId, dmmAffiliateId)
 	response := buildResponse(res.Result.Items)
