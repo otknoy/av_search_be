@@ -18,21 +18,26 @@ type Response struct {
 	Items []Item `json:"items"`
 }
 
+var dmmApiId string = os.Getenv("DMM_API_ID")
+var dmmAffiliateId string = os.Getenv("DMM_AFFILIATE_ID")
+var port string = "8080"
+
 func main() {
-	dmmApiId := os.Getenv("DMM_API_ID")
-	dmmAffiliateId := os.Getenv("DMM_AFFILIATE_ID")
+	http.HandleFunc("/search", search)
 
-	http.HandleFunc("/search", func(w http.ResponseWriter, r *http.Request) {
-		qs := r.URL.Query()
-		keyword := qs["keyword"][0]
+	log.Print("start server: port=" + port)
 
-		res := dmm.Search(keyword, dmmApiId, dmmAffiliateId)
-		response := buildResponse(res.Result.Items)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
+}
 
-		json.NewEncoder(w).Encode(response)
-	})
+func search(w http.ResponseWriter, r *http.Request) {
+	qs := r.URL.Query()
+	keyword := qs["keyword"][0]
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	res := dmm.Search(keyword, dmmApiId, dmmAffiliateId)
+	response := buildResponse(res.Result.Items)
+
+	json.NewEncoder(w).Encode(response)
 }
 
 func buildResponse(dmmItems []dmm.Item) []Item {
