@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./dmm"
 	"encoding/json"
+	"github.com/otknoy/av_search_be/dmm"
 	"log"
 	"net/http"
 	"os"
