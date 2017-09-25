@@ -15,7 +15,7 @@ func Search(w http.ResponseWriter, r *http.Request) {
 	qs := r.URL.Query()
 	keyword := strings.Join(qs["keyword"], " ")
 
-	result, err := dmm.SearchItems(keyword, dmmAffiliateId, dmmApiId)
+	result, err := dmm.SearchItems(keyword)
 	if err != nil {
 		log.Print(err)
 	}
