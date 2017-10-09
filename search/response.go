@@ -1,9 +1,9 @@
-package main
+package search
 
 type Item struct {
 	Title    string `json:"title"`
-	Url      string `json:"url"`
-	ImageUrl string `json:"image_url"`
+	Url      string `json:"URL"`
+	ImageUrl string `json:"URL"`
 }
 
 type Items []Item

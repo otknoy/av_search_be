@@ -1,4 +1,4 @@
-package main
+package search
 
 import (
 	"encoding/json"
@@ -7,21 +7,19 @@ import (
 	"strings"
 
 	"github.com/dmmlabo/dmm-go-sdk/api"
-
-	"github.com/otknoy/av_search_be/dmm"
 )
 
 func Search(w http.ResponseWriter, r *http.Request) {
 	qs := r.URL.Query()
 	keyword := strings.Join(qs["keyword"], " ")
 
-	result, err := dmm.SearchItems(keyword, dmmAffiliateId, dmmApiId)
+	result, err := SearchItems(keyword)
 	if err != nil {
 		log.Print(err)
 	}
 
-	response := buildResponse(result)
-	json.NewEncoder(w).Encode(response)
+	// response := buildResponse(result)
+	json.NewEncoder(w).Encode(result)
 }
 
 func buildResponse(response *api.ProductResponse) Response {

@@ -3,15 +3,14 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
+
+	"github.com/otknoy/av_search_be/search"
 )
 
-var dmmApiId string = os.Getenv("DMM_API_ID")
-var dmmAffiliateId string = os.Getenv("DMM_AFFILIATE_ID")
 var port string = "8080"
 
 func main() {
-	http.HandleFunc("/search", Search)
+	http.HandleFunc("/search", search.Search)
 
 	log.Print("start server: port=" + port)
 

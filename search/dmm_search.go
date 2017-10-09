@@ -1,12 +1,16 @@
-package dmm
+package search
 
 import (
 	"log"
+	"os"
 
 	"github.com/dmmlabo/dmm-go-sdk/api"
 )
 
-func SearchItems(keyword, dmmAffiliateId, dmmApiId string) (*api.ProductResponse, error) {
+var dmmApiId string = os.Getenv("DMM_API_ID")
+var dmmAffiliateId string = os.Getenv("DMM_AFFILIATE_ID")
+
+func SearchItems(keyword string) (*api.ProductResponse, error) {
 	s := api.NewProductService(dmmAffiliateId, dmmApiId)
 	s.SetSite("DMM.R18")
 	s.SetService("digital")
