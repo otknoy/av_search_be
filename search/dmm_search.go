@@ -1,30 +1,49 @@
 package search
 
 import (
-	"log"
-	"os"
-
-	"github.com/dmmlabo/dmm-go-sdk/api"
+	"github.com/otknoy/av_search_be/dmm"
 )
 
-var dmmApiId string = os.Getenv("DMM_API_ID")
-var dmmAffiliateId string = os.Getenv("DMM_AFFILIATE_ID")
+func SearchItems(keyword string) Response {
+	response := dmm.SearchItems(keyword)
 
-func SearchItems(keyword string) (*api.ProductResponse, error) {
-	s := api.NewProductService(dmmAffiliateId, dmmApiId)
-	s.SetSite("DMM.R18")
-	s.SetService("digital")
-	s.SetFloor("videoa")
-	s.SetLength(20)
-	s.SetOffset(1)
-	s.SetKeyword(keyword)
-	s.SetSort("date")
+	return mapResponse(response)
+}
 
-	url, err := s.BuildRequestURL()
-	if err == nil {
-		log.Print(url)
+func mapResponse(dmm_response dmm.Response) Response {
+	res := Response{
+		ResultCount:   dmm_response.Result.ResultCount,
+		TotalCount:    dmm_response.Result.TotalCount,
+		FirstPosition: dmm_response.Result.FirstPosition,
 	}
 
-	result, err := s.Execute()
-	return result, err
+	items := []Item{}
+	for _, i := range dmm_response.Result.Items {
+		item := Item{
+			Title:    i.Title,
+			Url:      i.URL,
+			ImageUrl: i.ImageURL.Large,
+			Date:     i.Date,
+		}
+
+		genres := []Genre{}
+		for _, g := range i.Iteminfo.Genre {
+			genres = append(genres, Genre{g.ID, g.Name})
+		}
+		item.Genre = genres
+
+		actresses := []Actress{}
+		for _, a := range i.Iteminfo.Actresses {
+			actresses = append(
+				actresses,
+				Actress{a.ID, a.Name, a.Ruby},
+			)
+		}
+		item.Actress = actresses
+
+		items = append(items, item)
+	}
+	res.Items = items
+
+	return res
 }
