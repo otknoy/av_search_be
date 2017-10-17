@@ -14,14 +14,12 @@ type Actress struct {
 type Actresses []Actress
 
 func (a *Actresses) UnmarshalJSON(b []byte) error {
-	var actress interface{}
-	err := json.Unmarshal(b, &actress)
+	var ary []interface{}
+	err := json.Unmarshal(b, &ary)
 	if err != nil {
 		log.Print("failed to unmarshal Actresses")
 		return err
 	}
-
-	ary := actress.([]interface{})
 
 	chunks := chunkArray(ary, 3)
 	var actresses Actresses
