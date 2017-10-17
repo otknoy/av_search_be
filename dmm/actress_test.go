@@ -52,9 +52,9 @@ func TestUnmarshalJSON(t *testing.T) {
 		t.Fatal("failed test")
 	}
 
-	// for i, e := range expected {
-	// 	if e != actual[i] {
-	// 		t.Fatal("failed test")
-	// 	}
-	// }
+	for i, e := range expected {
+		if e != actual[i] {
+			t.Fatal("failed test")
+		}
+	}
 }
