@@ -23,7 +23,7 @@ func (a *Actresses) UnmarshalJSON(b []byte) error {
 
 	ary := actress.([]interface{})
 
-	chunks := split(ary, 3)
+	chunks := chunkArray(ary, 3)
 	var actresses Actresses
 	for _, c := range chunks {
 		id := c[0].(map[string]interface{})["id"].(float64)
@@ -38,7 +38,7 @@ func (a *Actresses) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-func split(array []interface{}, size int) [][]interface{} {
+func chunkArray(array []interface{}, size int) [][]interface{} {
 	var chunks [][]interface{}
 	n := len(array)
 	for i := 0; i < n; i += size {
