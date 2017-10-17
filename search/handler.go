@@ -6,7 +6,9 @@ import (
 	"strings"
 )
 
-func Search(w http.ResponseWriter, r *http.Request) {
+type Handler struct{}
+
+func (h *Handler) Search(w http.ResponseWriter, r *http.Request) {
 	qs := r.URL.Query()
 	keyword := strings.Join(qs["keyword"], " ")
 
