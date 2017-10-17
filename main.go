@@ -10,7 +10,10 @@ import (
 var port string = "8080"
 
 func main() {
-	http.HandleFunc("/search", search.Search)
+	handler := &search.Handler{}
+	handler.Cache = search.NewCache()
+
+	http.HandleFunc("/search", handler.Search)
 
 	log.Print("start server: port=" + port)
 
