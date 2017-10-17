@@ -2,19 +2,33 @@ package search
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"strings"
 )
 
-type Handler struct{}
+type Handler struct {
+	Cache *Cache
+}
 
 func (h *Handler) Search(w http.ResponseWriter, r *http.Request) {
 	qs := r.URL.Query()
 	keyword := strings.Join(qs["keyword"], " ")
 
-	result := SearchItems(keyword)
+	cacheKey := keyword
 
-	json.NewEncoder(w).Encode(result)
+	response, ok := h.Cache.Get(cacheKey)
+	log.Println(ok)
+	if ok {
+		json.NewEncoder(w).Encode(response)
+		return
+	}
+
+	response = SearchItems(keyword)
+
+	h.Cache.Set(cacheKey, response)
+
+	json.NewEncoder(w).Encode(response)
 }
 
 // func buildResponse(response *api.ProductResponse) Response {

@@ -11,6 +11,7 @@ var port string = "8080"
 
 func main() {
 	handler := &search.Handler{}
+	handler.Cache = search.NewCache()
 
 	http.HandleFunc("/search", handler.Search)
 
