@@ -40,8 +40,8 @@ func SearchItems(keyword string) Response {
 
 func buildURL(keyword string) url.URL {
 	q := url.Values{}
-	q.Add("api_id", dmmApiId)
-	q.Add("affiliate_id", dmmAffiliateId)
+	q.Add("api_id", dmmAPIID)
+	q.Add("affiliate_id", dmmAffiliateID)
 	q.Add("site", "DMM.R18")
 	q.Add("service", "digital")
 	q.Add("floor", "videoa")
