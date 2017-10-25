@@ -4,10 +4,12 @@ import (
 	"encoding/json"
 	"net/http"
 	"strings"
+
+	"github.com/otknoy/av_search_be/cache"
 )
 
 type Handler struct {
-	Cache *Cache
+	Cache cache.CacheRepository
 }
 
 func (h *Handler) Search(w http.ResponseWriter, r *http.Request) {
@@ -15,6 +17,8 @@ func (h *Handler) Search(w http.ResponseWriter, r *http.Request) {
 	keyword := strings.Join(qs["keyword"], " ")
 
 	cacheKey := keyword
+
+	h.Cache.Get(cacheKey)
 
 	response, ok := h.Cache.Get(cacheKey)
 	if ok {

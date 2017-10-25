@@ -9,14 +9,11 @@ import (
 	"os"
 )
 
-// https://api.dmm.com/affiliate/v3/ItemList?affiliate_id=exsearch-990&api_id=Z5kd6ymEvRSNneLSP24Y&floor=videoa&hits=20&keyword=%E6%B9%8A%E8%8E%89%E4%B9%85&offset=1&service=digital&site=DMM.R18&sort=date
-// http://api.dmm.com/affiliate/v3/ItemList?affiliate_id=exsearch-990&api_id=Z5kd6ymEvRSNneLSP24Y&floor=videoa&hits=%14&keyword=湊莉久&offset=%01&service=digital&site=DMM.R18&sort=date
-
-var dmmApiId string = os.Getenv("DMM_API_ID")
-var dmmAffiliateId string = os.Getenv("DMM_AFFILIATE_ID")
+var dmmAPIID = os.Getenv("DMM_API_ID")
+var dmmAffiliateID = os.Getenv("DMM_AFFILIATE_ID")
 
 func SearchItems(keyword string) Response {
-	u := buildUrl(keyword)
+	u := buildURL(keyword)
 
 	log.Print(u.String())
 
@@ -41,10 +38,10 @@ func SearchItems(keyword string) Response {
 	return r
 }
 
-func buildUrl(keyword string) url.URL {
+func buildURL(keyword string) url.URL {
 	q := url.Values{}
-	q.Add("api_id", dmmApiId)
-	q.Add("affiliate_id", dmmAffiliateId)
+	q.Add("api_id", dmmAPIID)
+	q.Add("affiliate_id", dmmAffiliateID)
 	q.Add("site", "DMM.R18")
 	q.Add("service", "digital")
 	q.Add("floor", "videoa")
