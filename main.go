@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/otknoy/av_search_be/cache"
+	"github.com/otknoy/av_search_be/search"
 )
 
 var port = "8080"
@@ -13,6 +14,7 @@ var port = "8080"
 func main() {
 	handler := &Handler{}
 	handler.Cache = cache.NewSimpleCache(24*60*time.Minute, 3*24*60*time.Minute)
+	handler.ItemRepository = search.NewDmmItemRepository()
 
 	http.HandleFunc("/search", handler.Search)
 

@@ -10,7 +10,8 @@ import (
 )
 
 type Handler struct {
-	Cache cache.Cache
+	Cache          cache.Cache
+	ItemRepository search.ItemRepository
 }
 
 func (h *Handler) Search(w http.ResponseWriter, r *http.Request) {
@@ -27,7 +28,7 @@ func (h *Handler) Search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response = search.SearchItems(keyword)
+	response = h.ItemRepository.Search(keyword)
 
 	h.Cache.Set(cacheKey, response)
 
