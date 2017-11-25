@@ -10,7 +10,7 @@ import (
 )
 
 type Handler struct {
-	Cache cache.CacheRepository
+	Cache cache.Cache
 }
 
 func (h *Handler) Search(w http.ResponseWriter, r *http.Request) {

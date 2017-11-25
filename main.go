@@ -12,7 +12,7 @@ var port = "8080"
 
 func main() {
 	handler := &Handler{}
-	handler.Cache = cache.NewSimpleCacheRepository(24*60*time.Minute, 3*24*60*time.Minute)
+	handler.Cache = cache.NewSimpleCache(24*60*time.Minute, 3*24*60*time.Minute)
 
 	http.HandleFunc("/search", handler.Search)
 
