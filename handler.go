@@ -1,4 +1,4 @@
-package search
+package main
 
 import (
 	"encoding/json"
@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/otknoy/av_search_be/cache"
+	"github.com/otknoy/av_search_be/search"
 )
 
 type Handler struct {
@@ -26,7 +27,7 @@ func (h *Handler) Search(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response = SearchItems(keyword)
+	response = search.SearchItems(keyword)
 
 	h.Cache.Set(cacheKey, response)
 
