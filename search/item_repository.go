@@ -33,8 +33,8 @@ func mapResponse(dmmResponse dmm.Response) Response {
 	for _, i := range dmmResponse.Result.Items {
 		item := Item{
 			Title:    i.Title,
-			Url:      i.URL,
-			ImageUrl: i.ImageURL.Large,
+			URL:      i.URL,
+			ImageURL: i.ImageURL.Large,
 			Date:     i.Date,
 		}
 
