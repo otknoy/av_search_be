@@ -9,11 +9,12 @@ import (
 	"github.com/otknoy/av_search_be/search"
 )
 
-var port string = "8080"
+var port = "8080"
 
 func main() {
-	handler := &search.Handler{}
-	handler.Cache = cache.NewSimpleCacheRepository(24*60*time.Minute, 3*24*60*time.Minute)
+	handler := &Handler{}
+	handler.Cache = cache.NewSimpleCache(24*60*time.Minute, 3*24*60*time.Minute)
+	handler.ItemRepository = search.NewDmmItemRepository()
 
 	http.HandleFunc("/search", handler.Search)
 

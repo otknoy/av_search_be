@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-func TestSimpleCacheRepository(t *testing.T) {
-	cr := NewSimpleCacheRepository(5*time.Minute, 10*time.Minute)
+func TestSimpleCache(t *testing.T) {
+	cr := NewSimpleCache(5*time.Minute, 10*time.Minute)
 	if cr == nil {
 		t.Fatal("Failed to create Cache")
 	}

@@ -9,20 +9,20 @@ type Response struct {
 
 type Item struct {
 	Title    string    `json:"title"`
-	Url      string    `json:"url"`
-	ImageUrl string    `json:"image_url"`
+	URL      string    `json:"url"`
+	ImageURL string    `json:"image_url"`
 	Date     string    `json:"date"`
 	Genre    []Genre   `json:"genre"`
 	Actress  []Actress `json:"actress"`
 }
 
 type Genre struct {
-	Id   int    `json:"id"`
+	ID   int    `json:"id"`
 	Name string `json:"name"`
 }
 
 type Actress struct {
-	Id   int    `json:"id"`
+	ID   int    `json:"id"`
 	Name string `json:"name"`
 	Ruby string `json:"ruby"`
 }

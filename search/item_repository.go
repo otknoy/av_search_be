@@ -4,25 +4,37 @@ import (
 	"github.com/otknoy/av_search_be/dmm"
 )
 
-func SearchItems(keyword string) Response {
+type ItemRepository interface {
+	Search(keyword string) Response
+}
+
+type DmmItemRepository struct {
+}
+
+func NewDmmItemRepository() ItemRepository {
+	ir := &DmmItemRepository{}
+	return ir
+}
+
+func (repo *DmmItemRepository) Search(keyword string) Response {
 	response := dmm.SearchItems(keyword)
 
 	return mapResponse(response)
 }
 
-func mapResponse(dmm_response dmm.Response) Response {
+func mapResponse(dmmResponse dmm.Response) Response {
 	res := Response{
-		ResultCount:   dmm_response.Result.ResultCount,
-		TotalCount:    dmm_response.Result.TotalCount,
-		FirstPosition: dmm_response.Result.FirstPosition,
+		ResultCount:   dmmResponse.Result.ResultCount,
+		TotalCount:    dmmResponse.Result.TotalCount,
+		FirstPosition: dmmResponse.Result.FirstPosition,
 	}
 
 	items := []Item{}
-	for _, i := range dmm_response.Result.Items {
+	for _, i := range dmmResponse.Result.Items {
 		item := Item{
 			Title:    i.Title,
-			Url:      i.URL,
-			ImageUrl: i.ImageURL.Large,
+			URL:      i.URL,
+			ImageURL: i.ImageURL.Large,
 			Date:     i.Date,
 		}
 
